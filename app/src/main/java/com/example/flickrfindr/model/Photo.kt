@@ -22,9 +22,9 @@ class Photo {
     @Expose
     var url_t: String? = null
 
-    @SerializedName("url_c")
+    @SerializedName("url_o")
     @Expose
-    var url_c: String? = null
+    var url_o: String? = null
 
     val goToImage = Event(Unit)
 
@@ -32,7 +32,7 @@ class Photo {
         goToImage.raiseEvent(Unit)
     }
     override fun toString(): String {
-        return "$id\n$url_c\n$url_c"
+        return "$id\n$url_t\n$url_o"
     }
 }
 

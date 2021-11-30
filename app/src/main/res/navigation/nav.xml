@@ -9,5 +9,19 @@
         android:id="@+id/home2"
         android:name="com.example.flickrfindr.home.Home"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_home2_to_photo"
+            app:destination="@id/photo" />
+    </fragment>
+    <fragment
+        android:id="@+id/photo"
+        android:name="com.example.flickrfindr.home.Photo"
+        android:label="photo_fragment"
+        tools:layout="@layout/photo_fragment" >
+        <argument
+            android:name="url"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
 </navigation>

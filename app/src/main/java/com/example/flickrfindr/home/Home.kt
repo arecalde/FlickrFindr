@@ -10,14 +10,13 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flickrfindr.R
 import com.example.flickrfindr.databinding.HomeFragmentBinding
 import com.example.flickrfindr.databinding.PhotoItemBinding
-import com.example.flickrfindr.extensions.hideKeyboard
+import com.example.flickrfindr.extensions.FragmentHelper
 import com.example.flickrfindr.model.Photo
-import com.squareup.picasso.Picasso
 
 class Home : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
@@ -36,7 +35,7 @@ class Home : Fragment() {
         val observedItems = mutableListOf<String>()
 
         viewModel.hideKeyboard.observeEvent(viewLifecycleOwner) {
-            hideKeyboard()
+            FragmentHelper().hideKeyboard(this)
         }
 
         viewModel.photos.observe(viewLifecycleOwner) { map ->
@@ -48,8 +47,7 @@ class Home : Fragment() {
 
                 val photoItem = entry.value
                 photoItem.goToImage.observeEvent(viewLifecycleOwner) {
-                    Toast.makeText(requireContext(), "Show Image Page", Toast.LENGTH_LONG).show()
-                    //findNavController().navigate(FeedFragmentDirections.actionFeedFragmentToProfileFragment(postItem.owner, postItem.username, postItem.avatar))
+                    findNavController().navigate(HomeDirections.actionHome2ToPhoto(photoItem.url_o ?: ""))
                 }
                 observedItems.add(entry.key)
             }
