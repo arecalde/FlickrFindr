@@ -8,35 +8,15 @@ class Photo {
     @Expose
     var id: String? = null
 
-    @SerializedName("owner")
+    @SerializedName("url_t")
     @Expose
-    var owner: String? = null
+    var url_t: String? = null
 
-    @SerializedName("secret")
+    @SerializedName("url_c")
     @Expose
-    var secret: String? = null
-
-    @SerializedName("server")
-    @Expose
-    var server: String? = null
-
-    @SerializedName("title")
-    @Expose
-    var title: String? = null
-
-    @SerializedName("ispublic")
-    @Expose
-    var ispublic: Int? = null
-
-    @SerializedName("isfriend")
-    @Expose
-    var isfriend: Int? = null
-
-    @SerializedName("isfamily")
-    @Expose
-    var isfamily: Int? = null
+    var url_c: String? = null
 
     override fun toString(): String {
-        return id ?: ""
+        return "$id\n$url_c\n$url_c"
     }
 }

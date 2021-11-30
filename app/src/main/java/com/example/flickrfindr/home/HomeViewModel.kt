@@ -19,12 +19,14 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             "text" to "dogs",
             "method" to "flickr.photos.search",
             "format" to "json",
-            "nojsoncallback" to "1"
+            "nojsoncallback" to "1",
+            "extras" to "url_c,url_t",
+            "per_page" to "4"
         ))
 
         viewModelScope.launch(Dispatchers.IO) {
             val result = call.execute()
-            Log.i("Result", result.body().toString())
+            text.postValue(result.body().toString())
         }
     }
 }
