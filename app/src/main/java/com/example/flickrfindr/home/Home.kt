@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.flickrfindr.R
 import com.example.flickrfindr.databinding.HomeFragmentBinding
 import com.example.flickrfindr.databinding.PhotoItemBinding
-import com.example.flickrfindr.extensions.hideKeyboard
+import com.example.flickrfindr.extensions.FragmentHelper
 import com.example.flickrfindr.model.Photo
 import com.squareup.picasso.Picasso
 
@@ -37,7 +37,7 @@ class Home : Fragment() {
         val observedItems = mutableListOf<String>()
 
         viewModel.hideKeyboard.observeEvent(viewLifecycleOwner) {
-            hideKeyboard()
+            FragmentHelper().hideKeyboard(this)
         }
 
         viewModel.photos.observe(viewLifecycleOwner) { map ->
