@@ -43,7 +43,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             "method" to "flickr.photos.search",
             "format" to "json",
             "nojsoncallback" to "1",
-            "extras" to "url_c,url_t",
+            "extras" to "url_t,url_o",
             "per_page" to "25"
         ))
 

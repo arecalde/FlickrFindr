@@ -11,14 +11,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flickrfindr.R
 import com.example.flickrfindr.databinding.HomeFragmentBinding
 import com.example.flickrfindr.databinding.PhotoItemBinding
 import com.example.flickrfindr.extensions.FragmentHelper
 import com.example.flickrfindr.model.Photo
-import com.squareup.picasso.Picasso
 
 class Home : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
@@ -49,7 +47,7 @@ class Home : Fragment() {
 
                 val photoItem = entry.value
                 photoItem.goToImage.observeEvent(viewLifecycleOwner) {
-                    findNavController().navigate(HomeDirections.actionHome2ToPhoto(photoItem.url_c ?: ""))
+                    findNavController().navigate(HomeDirections.actionHome2ToPhoto(photoItem.url_o ?: ""))
                 }
                 observedItems.add(entry.key)
             }
