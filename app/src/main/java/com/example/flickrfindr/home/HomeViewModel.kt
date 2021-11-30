@@ -3,14 +3,17 @@ package com.example.flickrfindr.home
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.flickrfindr.model.Photo
 import com.example.flickrfindr.network.APIService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
-    var text = MutableLiveData("Hello World")
+    val _photos = MutableLiveData(mapOf<String, Photo>())
+    val photos: LiveData<Map<String, Photo>> = _photos
 
     init {
         val apiService = APIService.retrofit.create(APIService::class.java)
@@ -21,12 +24,20 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             "format" to "json",
             "nojsoncallback" to "1",
             "extras" to "url_c,url_t",
-            "per_page" to "4"
+            "per_page" to "25"
         ))
 
         viewModelScope.launch(Dispatchers.IO) {
             val result = call.execute()
-            text.postValue(result.body().toString())
+            val photosFromCall = result.body()?.photos?.photos ?: return@launch
+            val photoMap = mutableMapOf<String, Photo>()
+
+            photosFromCall.forEach {
+                val key = it.id ?: return@forEach
+                photoMap[key] = it
+            }
+
+            _photos.postValue(photoMap)
         }
     }
 }
