@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flickrfindr.R
@@ -48,8 +49,7 @@ class Home : Fragment() {
 
                 val photoItem = entry.value
                 photoItem.goToImage.observeEvent(viewLifecycleOwner) {
-                    Toast.makeText(requireContext(), "Show Image Page", Toast.LENGTH_LONG).show()
-                    //findNavController().navigate(FeedFragmentDirections.actionFeedFragmentToProfileFragment(postItem.owner, postItem.username, postItem.avatar))
+                    findNavController().navigate(HomeDirections.actionHome2ToPhoto(photoItem.url_c ?: ""))
                 }
                 observedItems.add(entry.key)
             }

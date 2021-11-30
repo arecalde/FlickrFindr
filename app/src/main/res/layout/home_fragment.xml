@@ -26,15 +26,15 @@
         />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/photoRecyclerView"
-            tools:listitem="@layout/photo_item"
-            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/searchView"/>
+            app:layout_constraintTop_toBottomOf="@+id/searchView"
+            tools:listitem="@layout/photo_item" />
 
         <ProgressBar
             android:id="@+id/progressBar"
