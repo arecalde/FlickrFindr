@@ -18,7 +18,7 @@ class Home : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = HomeFragmentBinding.inflate(inflater)
-        
+
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
