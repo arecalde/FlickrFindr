@@ -6,12 +6,24 @@
         <variable
             name="viewModel"
             type="com.example.flickrfindr.home.HomeViewModel" />
-
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/searchView"
+            app:iconifiedByDefault="false"
+            android:focusable="false"
+            queryTextListener="@{viewModel.onQueryTextListener}"
+            app:defaultQueryHint="Enter search term here"
+            app:queryHint="Enter search term here"
+        />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -22,7 +34,17 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/searchView"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="@{ viewModel.loading ? View.VISIBLE : View.GONE }"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
